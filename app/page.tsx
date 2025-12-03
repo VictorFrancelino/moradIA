@@ -1,68 +1,106 @@
+import Link from 'next/link';
 import { Button } from 'primereact/button';            
 import { Calculator, TrendingUp, ChartPie, Clock } from 'lucide-react';         
+import Feature from '@/components/home/feature';
+import HowItWorks from '@/components/home/howItWorks';
 
 export default function Home() {
-  return (
+  const features = [
+    {
+      icon: Calculator,
+      title: 'Cálculo Completo',
+      description: 'Calcula todos os custos envolvidos na sua mudança, desde transporte até taxas ocultas.'
+    },
+    {
+      icon: TrendingUp,
+      title: 'Plano de Poupança',
+      description: 'Divida o valor total em parcelas mensais que cabem no seu bolso.'
+    },
+    {
+      icon: ChartPie,
+      title: 'Análise Detalhada',
+      description: 'Veja gráficos visuais da distribuição de cada custo no seu orçamento.'
+    },
+    {
+      icon: Clock,
+      title: 'Tempo Personalizável',
+      description: 'Defina sua meta de tempo e veja quanto precisa guardar por mês.'
+    }
+  ];
+
+  const steps = [
+    { step: '1', title: 'Selecione o Tipo', desc: 'Casa, apartamento ou kitnet' },
+    { step: '2', title: 'Escolha a Forma', desc: 'Aluguel ou compra do imóvel' },
+    { step: '3', title: 'Defina o Local', desc: 'Região e bairro desejado' },
+    { step: '4', title: 'Defina a Metragem', desc: 'Tamanho ideal em m²' },
+    { step: '5', title: 'Itens & Móveis', desc: 'O que você precisa comprar?' },
+    { step: '6', title: 'Resultados', desc: 'Receba sua estimativa via IA' },
+  ];
+
+  return (  
     <>
-      <header className="w-full text-center p-5 shadow-md">
-        <h1 className="font-bold text-xl">MoradIA</h1>
-      </header>
-      <main className="p-5 text-center">
-        <div className="space-y-5 p-10">
-          <h1 className="text-gray-950 text-6xl font-bold text-center">Calculadora de Mudança</h1>
-          <p className="text-gray-500">Descubra quanto você precisa economizar para se mudar. Calcule todos os custos e planeje sua mudança de forma inteligente.</p>
-          <Button>Começar</Button>
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-size-[6rem_4rem]"></div>
+      </div>
+      
+      <div className="space-y-6 pt-20">
+        <h1 className="text-gray-900 text-6xl md:text-7xl font-extrabold tracking-tight">
+          Calculadora de <span className="text-indigo-600">Mudança</span>
+        </h1>
+        <p className="text-gray-600 text-lg md:text-xl leading-relaxed">
+          Descubra quanto você precisa economizar para se mudar. Calcule todos os custos e planeje sua mudança de forma inteligente e sem surpresas.
+        </p>
+        <div className="pt-4">
+          <Link href="/calculator">
+            <Button size="large" className="font-bold px-8 py-4 shadow-lg shadow-indigo-200">
+              Começar Agora
+            </Button>
+          </Link>
         </div>
-        <div className="w-full px-40 space-x-5 flex flex-wrap">
-          <div className="max-w-96 p-5 w-full rounded-md shadow-md space-y-2.5">
-            <Calculator color="#6366f1" size="40" />
-            <h2 className='text-left text-xl font-bold'>Cálculo Completo</h2>
-            <p className='text-left text-gray-500'>Calcula todos os custos envolvidos na sua mudança</p>
-          </div>
-          <div className="max-w-96 p-5 w-full rounded-md shadow-md space-y-2.5">
-            <TrendingUp color="#6366f1" size="40" />
-            <h2 className='text-left text-xl font-bold'>Plano de Poupança</h2>
-            <p className='text-left text-gray-500'>Divida o valor total em parcelas mensais</p>
-          </div>
-          <div className="max-w-96 p-5 w-full rounded-md shadow-md space-y-2.5">
-            <ChartPie color="#6366f1" size="40" />
-            <h2 className='text-left text-xl font-bold'>Análise Detalhada</h2>
-            <p className='text-left text-gray-500'>Veja a distribuição de cada custo</p>
-          </div>
-          <div className="max-w-96 p-5 w-full rounded-md shadow-md space-y-2.5">
-            <Clock color="#6366f1" size="40" />
-            <h2 className='text-left text-xl font-bold'>Tempo Personalizável</h2>
-            <p className='text-left text-gray-500'>Escolha quantos meses quer para economizar</p>
-          </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {features.map((feature, index) => (
+          <Feature 
+            key={index}
+            icon={feature.icon} 
+            title={feature.title} 
+            description={feature.description} 
+          />
+        ))}
+      </div>
+
+      <div className="space-y-12 text-center bg-gray-50 py-20 rounded-xl">
+        <div>
+          <h2 className='text-3xl md:text-4xl font-bold text-gray-950'>Como Funciona</h2>
+          <p className="text-gray-600 mt-2">Simples, rápido e eficiente.</p>
         </div>
-        <div className="mx-50 border-2 rounded-md p-5 space-y-5">
-          <h2 className='text-xl font-bold'>Como Funciona</h2>
-          <div className='flex justify-between'>
-            <div className='flex flex-col items-center space-y-1'>
-              <div className='bg-indigo-500 flex w-12 h-12 justify-center items-center p-5 rounded-full'>
-                <p>1</p>
-              </div>
-              <h3 className='font-bold'>Selecione o Tipo</h3>
-              <p className='text-gray-500'>Casa, apartamento ou kitnet</p>
-            </div>
-            <div>
-              <p>2</p>
-              <h3>Escolha a Forma</h3>
-              <p>Aluguel ou compra</p>
-            </div>
-            <div>
-              <p>3</p>
-              <h3>Defina o Local</h3>
-              <p>Região e tamanho do imóvel</p>
-            </div>
-            <div>
-              <p>4</p>
-              <h3>Visualize Custos</h3>
-              <p>Obtenha seu plano de poupança</p>
-            </div>
-          </div>
+        
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5'>
+          {steps.map((item, index) => (
+            <HowItWorks 
+              key={index}
+              step={item.step} 
+              title={item.title} 
+              description={item.desc} 
+            />
+          ))}
         </div>
-      </main>
+      </div>
+
+      <div className="space-y-8 mb-24">
+        <h2 className='text-4xl md:text-5xl font-bold text-gray-950'>
+          Pronto para Calcular?
+        </h2>
+        <p className='text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed'>
+          Use nossa calculadora para ter uma visão clara dos custos da sua mudança e criar um plano de poupança realista hoje mesmo.
+        </p>
+        <Link href="/calculator">
+          <Button size="large" className="font-bold px-8 py-4 shadow-lg shadow-indigo-200">
+            Começar Gratuitamente
+          </Button>
+        </Link>
+      </div>
     </>
   );
 }
